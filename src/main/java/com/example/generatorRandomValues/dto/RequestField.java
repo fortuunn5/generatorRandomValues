@@ -1,5 +1,19 @@
 package com.example.generatorRandomValues.dto;
 
-public class RequestField {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+public class RequestField {
+    private FieldType type;
+    private String name;
 }
+
+
+
+
