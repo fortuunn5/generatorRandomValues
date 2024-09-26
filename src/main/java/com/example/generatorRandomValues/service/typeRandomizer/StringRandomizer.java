@@ -1,7 +1,6 @@
 package com.example.generatorRandomValues.service.typeRandomizer;
 
 import com.example.generatorRandomValues.dto.FieldType;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
