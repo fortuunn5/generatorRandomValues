@@ -19,19 +19,29 @@ import java.util.Map;
 @Service
 public class RandomValueGeneratorServiceImpl implements RandomValueGeneratorService {
 
+    @Override
+    public List<Map<String, Object>> generateValuesBySchema(RequestSchema schema) {
+        List<Map<String, Object>> values = new ArrayList<>();
+        for (int i = 0; i < schema.getCount(); i++) {
+            values.add(generateValuesByFields(schema.getFields()));
+        }
+        return values;
+    }
+
     /**
-     *Generate value and format it by format
-     * @param type - type for generate value
+     * Generate value and format it by format
+     *
+     * @param type   - type for generate value
      * @param format - format from request. if it not present - use {@link TypeFormatter#getDefaultFormat()} for given type
      * @return formatted value if format present.
      */
     @Override
-    public Object getFormattedValue(FieldType type, @Nullable String format){
+    public Object getFormattedValue(FieldType type, @Nullable String format) {
         Object value = generateValue(type);
 
         TypeFormatter formatter = ContextHelper.getFormatterBeanByType(type);
 
-        if (formatter != null){
+        if (formatter != null) {
             return formatter.format(value, format);
         }
         return value;
@@ -49,19 +59,10 @@ public class RandomValueGeneratorServiceImpl implements RandomValueGeneratorServ
         return randomValue;
     }
 
-    @Override
-    public List<Map<String, Object>> generateValuesBySchema(RequestSchema schema) {
-        List<Map<String, Object>> values = new ArrayList<>();
-        for (int i = 0; i < schema.getCount(); i++) {
-            values.add(generateValuesByFields(schema.getFields()));
-        }
-        return values;
-    }
-
     private Map<String, Object> generateValuesByFields(List<RequestField> fields) {
         Map<String, Object> valueOfFields = new HashMap<>();
         for (RequestField field : fields) {
-            valueOfFields.put(field.getName(), generateValue(field.getType()));
+            valueOfFields.put(field.getName(), getFormattedValue(field.getType(), field.getFormat()));
         }
         return valueOfFields;
     }
