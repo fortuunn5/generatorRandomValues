@@ -12,6 +12,7 @@ import lombok.Setter;
 public class RequestField {
     private FieldType type;
     private String name;
+    private String format;
 }
 
 
