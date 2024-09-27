@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 @RestController
 @RequiredArgsConstructor
 public class RandomGeneratorController {
@@ -19,10 +15,6 @@ public class RandomGeneratorController {
 
     @GetMapping
     public ResponseEntity<?> getValueByFieldType(@RequestBody RequestSchema schema) {
-        List<Map<String, Object>> values = new ArrayList<>();
-        for (int i = 0; i < schema.getCount(); i++) {
-            values.add(randomValueGeneratorService.generateValuesBySchema(schema));
-        }
-        return ResponseEntity.ok(values);
+        return ResponseEntity.ok(randomValueGeneratorService.generateValuesBySchema(schema));
     }
 }
