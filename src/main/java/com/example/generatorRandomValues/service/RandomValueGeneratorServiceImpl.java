@@ -8,16 +8,14 @@ import com.example.generatorRandomValues.service.typeRandomizer.TypeRandomizer;
 import com.example.generatorRandomValues.utils.ContextHelper;
 import jakarta.annotation.Nullable;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-@Log4j2
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
+@Log4j2
 @Service
 public class RandomValueGeneratorServiceImpl implements RandomValueGeneratorService {
 
