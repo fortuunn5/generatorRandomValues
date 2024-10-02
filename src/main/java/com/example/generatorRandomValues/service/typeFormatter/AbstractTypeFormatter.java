@@ -1,6 +1,9 @@
 package com.example.generatorRandomValues.service.typeFormatter;
 
-public abstract class AbstractTypeFormatter implements TypeFormatter{
+import org.apache.commons.lang3.StringUtils;
+
+public abstract class AbstractTypeFormatter implements TypeFormatter {
+
     protected abstract String getStringFormattedData(Object obj, String format);
 
     @Override
@@ -9,8 +12,8 @@ public abstract class AbstractTypeFormatter implements TypeFormatter{
         return getStringFormattedData(obj, dataFormat);
     }
 
-    private String getFormat(String format){
-        if (format.isBlank()){
+    private String getFormat(String format) {
+        if (StringUtils.isBlank(format)) {
             return getDefaultFormat();
         }
         return format;
