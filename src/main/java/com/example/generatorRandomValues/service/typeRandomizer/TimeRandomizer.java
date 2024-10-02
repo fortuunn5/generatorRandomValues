@@ -7,7 +7,11 @@ import java.time.LocalTime;
 import java.util.Random;
 
 @Service
-public class TimeRandomizer implements TypeRandomizer{
+public class TimeRandomizer implements TypeRandomizer {
+
+    private final int MIN_SEC = 0;
+    private final int MAX_SEC = 86399;
+
     @Override
     public FieldType getType() {
         return FieldType.TIME;
@@ -16,9 +20,6 @@ public class TimeRandomizer implements TypeRandomizer{
     @Override
     public LocalTime getRandomValue() {
         Random random = new Random();
-        // todo move to constants
-        return LocalTime.of(random.nextInt( 0, 23),
-                random.nextInt(0, 59),
-                random.nextInt(0, 59));
+        return LocalTime.ofSecondOfDay(random.nextLong(MIN_SEC, MAX_SEC));
     }
 }
