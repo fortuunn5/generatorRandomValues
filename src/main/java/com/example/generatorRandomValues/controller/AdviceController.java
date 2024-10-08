@@ -19,12 +19,15 @@ public class AdviceController {
 
     @ExceptionHandler(UnsupportedTemporalTypeException.class)
     public ResponseEntity<?> unsupportedTemporalTypeException(UnsupportedTemporalTypeException e) {
-        String message = getMessage("unsupportedTemporalTypeException.message");
+        String message = MessageUtil.getMessage("unsupportedTemporalTypeException.message", messageSource);
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
-    private String getMessage(String messageKey) {
-        Locale locale = Locale.ROOT;
-        return messageSource.getMessage(messageKey, null, locale);
+    private static class MessageUtil {
+        public static String getMessage(String messageKey, MessageSource ms) {
+            Locale locale = Locale.ROOT;
+
+            return ms.getMessage(messageKey, null, locale);
+        }
     }
 }
