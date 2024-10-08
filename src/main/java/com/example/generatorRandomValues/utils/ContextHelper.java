@@ -13,6 +13,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class ContextHelper implements ApplicationContextAware {
@@ -50,7 +51,8 @@ public class ContextHelper implements ApplicationContextAware {
     }
 
     public static MessageSource getMessageSourceBean() {
-        return (MessageSource) context.getBean("messageSource");
+        Optional<MessageSource> optionalMessageSource = Optional.of((MessageSource) context.getBean("messageSource"));
+        return optionalMessageSource.orElse(null);
     }
 
     private static void assertContextInjected() {
