@@ -9,9 +9,11 @@ import jakarta.annotation.Nullable;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class ContextHelper implements ApplicationContextAware {
@@ -46,6 +48,11 @@ public class ContextHelper implements ApplicationContextAware {
                 .filter(x -> x.getType().getName().equalsIgnoreCase(type))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public static MessageSource getMessageSourceBean() {
+        Optional<MessageSource> optionalMessageSource = Optional.of((MessageSource) context.getBean("messageSource"));
+        return optionalMessageSource.orElse(null);
     }
 
     private static void assertContextInjected() {
