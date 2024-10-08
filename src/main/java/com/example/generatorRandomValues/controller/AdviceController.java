@@ -1,5 +1,6 @@
 package com.example.generatorRandomValues.controller;
 
+import com.example.generatorRandomValues.utils.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.temporal.UnsupportedTemporalTypeException;
-import java.util.Locale;
 
 @ControllerAdvice(annotations = RestController.class)
 public class AdviceController {
@@ -19,15 +19,8 @@ public class AdviceController {
 
     @ExceptionHandler(UnsupportedTemporalTypeException.class)
     public ResponseEntity<?> unsupportedTemporalTypeException(UnsupportedTemporalTypeException e) {
-        String message = MessageUtil.getMessage("unsupportedTemporalTypeException.message", messageSource);
+        String message = MessageUtil.getMessage("unsupportedTemporalTypeException.message");
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
-    private static class MessageUtil {
-        public static String getMessage(String messageKey, MessageSource ms) {
-            Locale locale = Locale.ROOT;
-
-            return ms.getMessage(messageKey, null, locale);
-        }
-    }
 }

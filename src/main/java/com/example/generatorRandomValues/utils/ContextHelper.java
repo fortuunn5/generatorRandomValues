@@ -9,6 +9,7 @@ import jakarta.annotation.Nullable;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -46,6 +47,10 @@ public class ContextHelper implements ApplicationContextAware {
                 .filter(x -> x.getType().getName().equalsIgnoreCase(type))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public static MessageSource getMessageSourceBean() {
+        return (MessageSource) context.getBean("messageSource");
     }
 
     private static void assertContextInjected() {
