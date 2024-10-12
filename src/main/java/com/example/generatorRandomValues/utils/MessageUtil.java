@@ -14,11 +14,11 @@ public class MessageUtil {
         return getMessage(messageKey, null);
     }
 
-    public static String getMessage(String messageKey, List<Object> args) {
+    public static String getMessage(String messageKey, Object[] args) {
         MessageSource messageSource = ContextHelper.getMessageSourceBean();
         if (messageSource == null)
             throw new BeanNotFoundException("messages.properties file not found");
         Locale locale = Locale.ROOT;
-        return messageSource.getMessage(messageKey, args.toArray(), locale);
+        return messageSource.getMessage(messageKey, args, locale);
     }
 }
